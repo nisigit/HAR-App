@@ -13,8 +13,7 @@ class Classifier(
     val numFeatures: Int = 3,
     val stepSize: Int = 10,
     val outputSize: Int,
-    val activityList: List<String>
-) {
+    val activityList: List<String>) {
 
     private val bufferSize = 4  // Size of float32 in bytes
     private val inputBuffer = ByteBuffer.allocateDirect(bufferSize * 1 * windowSize * numFeatures)
@@ -24,14 +23,7 @@ class Classifier(
         inputBuffer.order(ByteOrder.nativeOrder())
     }
 
-    fun addData(
-        accel_x: Float,
-        accel_y: Float,
-        accel_z: Float,
-        gyro_x: Float,
-        gyro_y: Float,
-        gyro_z: Float
-    ) {
+    fun addData(accel_x: Float, accel_y: Float, accel_z: Float, gyro_x: Float, gyro_y: Float, gyro_z: Float) {
         Log.d("ADDING_DATA", "$accel_x, $accel_y, $accel_z, $gyro_x, $gyro_y, $gyro_z")
         if (index == windowSize) {
             // Delete the first 10 elements and shift the remaining data to the left
@@ -65,8 +57,7 @@ class Classifier(
         val fileChannel = inputStream.channel
         val startOffset = fileDescriptor.startOffset
         val declaredLength = fileDescriptor.declaredLength
-        val tfliteModel: ByteBuffer =
-            fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength)
+        val tfliteModel: ByteBuffer = fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength)
 
         val interpreter = Interpreter(tfliteModel)
 
