@@ -1,1 +1,2 @@
-# HAR-App
+# pdiotapp
+An application for data collection for PDIoT
