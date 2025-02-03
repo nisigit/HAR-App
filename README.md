@@ -1,2 +1,1 @@
-# pdiotapp
-An application for data collection for PDIoT
+Android application to parse live movement data from Nordic Thingy and Respeck sensors using Bluetooth. The app also classifies 44 stationary and dynamic activities, including running, hyperventilation, coughing etc., with a 97% accuracy. The TensorFlow classification models use Convolutional Neural Networks and were deployed using TFLite.
